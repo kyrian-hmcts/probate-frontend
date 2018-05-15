@@ -14,7 +14,7 @@ const POSTCODE_SERVICE_URL = config.services.postcode.url;
 const PERSISTENCE_SERVICE_URL = config.services.persistence.url;
 const CREATE_PAYMENT_SERVICE_URL = config.services.payment.createPaymentUrl;
 const TOKEN = config.services.postcode.token;
-const PROXY = config.services.postcode.proxy;
+const PROXY = config.services.proxy;
 const SERVICE_AUTHORISATION_URL = config.services.idam.s2s_url + '/lease';
 const serviceName = config.services.idam.service_name;
 const secret = config.services.idam.service_key;
@@ -176,7 +176,7 @@ const authorise = function () {
 };
 
 const getOauth2Token = function (code, redirectUri) {
-    logger.info('calling oauth2 token');
+    logger.info(`calling oauth2 token, proxy url: ${PROXY}`);
     const clientName = config.services.idam.probate_oauth2_client;
     const secret = config.services.idam.probate_oauth2_secret;
     const idam_api_url = config.services.idam.apiUrl;
@@ -191,12 +191,9 @@ const getOauth2Token = function (code, redirectUri) {
     params.append('code', code);
     params.append('redirect_uri', redirectUri);
 
-    return utils.fetchJson(`${idam_api_url}/oauth2/token`, {
-        method: 'POST',
-        timeout: 10000,
-        body: params.toString(),
-        headers: headers
-    });
+    const fetchOptions = utils.fetchOptions(params, 'POST', headers, PROXY);
+
+    return utils.fetchJson(`${idam_api_url}/oauth2/token`, fetchOptions);
 };
 
 const updatePhoneNumber = function (inviteId, data) {
