@@ -39,9 +39,9 @@ probate_frontend_use_idam = "true"
 
 probate_frontend_use_redis = "false"
 
-probate_business_service_url = "http://betaDevBprobateApp01.reform.hmcts.net:4101/validate"
+probate_business_service_url = "http://probate-business-service-saat-staging.service.core-compute-saat.internal/validate"
 
-probate_submit_service_url = "http://betaDevBprobateApp01.reform.hmcts.net:4102/submit"
+probate_submit_service_url = "http://probate-submit-service-saat-staging.service.core-compute-saat.internal/submit"
 
-probate_persistence_service_url = "http://betaDevBprobateApp01.reform.hmcts.net:4103/formdata"
+probate_persistence_service_url = " http://probate-persistence-service-saat-staging.service.core-compute-saat.internal/formdata"
 
