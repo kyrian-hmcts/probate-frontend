@@ -1,9 +1,9 @@
 env = "saat"
-deployment_env = "preprod"
+deployment_env = "test"
 
-vault_section = "preprod"
+vault_section = "test"
 
-packages_environment = "preprod"
+packages_environment = "test"
 packages_version = "3.0.0"
 
 probate_frontend_hostname = "probate-frontend-saat-staging.service.core-compute-saat.internal"
