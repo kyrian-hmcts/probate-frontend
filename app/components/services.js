@@ -193,7 +193,6 @@ const getOauth2Token = function (code, redirectUri) {
     logger.info(`params : ${params}`);
     logger.info(`json params : ${JSON.stringify(params)}`);
     const fetchOptions = utils.fetchOptions(params, 'POST', headers, PROXY);
-    
     return utils.fetchJson(`${idam_api_url}/oauth2/token`, fetchOptions);
 };
 
