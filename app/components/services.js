@@ -186,12 +186,15 @@ const getOauth2Token = function (code, redirectUri) {
         'Authorization': 'Basic ' + new Buffer(`${clientName}:${secret}`).toString('base64')
     };
 
-    const params = new URLSearchParams();
-    params.append('grant_type', 'authorization_code');
-    params.append('code', code);
-    params.append('redirect_uri', redirectUri);
+    const params = {
+        grant_type: 'authorization_code',
+        code: code,
+        redirect_uri: redirectUri
+    };
+
     logger.info(`params : ${params}`);
     logger.info(`json params : ${JSON.stringify(params)}`);
+
     const fetchOptions = utils.fetchOptions(params, 'POST', headers, PROXY);
     return utils.fetchJson(`${idam_api_url}/oauth2/token`, fetchOptions);
 };
