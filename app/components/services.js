@@ -182,7 +182,7 @@ const getOauth2Token = function (code, redirectUri) {
     const idam_api_url = config.services.idam.apiUrl;
 
     const headers = {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         'Authorization': 'Basic ' + new Buffer(`${clientName}:${secret}`).toString('base64')
     };
 
@@ -192,8 +192,9 @@ const getOauth2Token = function (code, redirectUri) {
         redirect_uri: redirectUri
     };
 
-    logger.info(`params : ${params}`);
-    logger.info(`json params : ${JSON.stringify(params)}`);
+    logger.info(headers);
+    logger.info(params);
+    logger.info(JSON.stringify(params));
 
     const fetchOptions = utils.fetchOptions(params, 'POST', headers, PROXY);
     return utils.fetchJson(`${idam_api_url}/oauth2/token`, fetchOptions);
