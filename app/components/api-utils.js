@@ -62,7 +62,7 @@ const fetchOptions = function (data, method, headers, proxy) {
         redirect: 'follow',
         follow: 10,
         timeout: 10000,
-        body: JSON.stringify(data),
+        body: typeof data === 'object' ? JSON.stringify(data) : data,
         headers: new fetch.Headers(headers),
         agent: proxy ? new HttpsProxyAgent(proxy) : null
     };

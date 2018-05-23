@@ -176,7 +176,7 @@ const authorise = function () {
 };
 
 const getOauth2Token = function (code, redirectUri) {
-    logger.info(`calling oauth2 token, proxy url: ${PROXY}`);
+    logger.info('calling oauth2 token');
     const clientName = config.services.idam.probate_oauth2_client;
     const secret = config.services.idam.probate_oauth2_secret;
     const idam_api_url = config.services.idam.apiUrl;
@@ -190,9 +190,9 @@ const getOauth2Token = function (code, redirectUri) {
     params.append('grant_type', 'authorization_code');
     params.append('code', code);
     params.append('redirect_uri', redirectUri);
-    logger.info(`params : ${params}`);
-    logger.info(`json params : ${JSON.stringify(params)}`);
+
     const fetchOptions = utils.fetchOptions(params, 'POST', headers, PROXY);
+
     return utils.fetchJson(`${idam_api_url}/oauth2/token`, fetchOptions);
 };
 
