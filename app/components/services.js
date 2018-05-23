@@ -195,7 +195,21 @@ const getOauth2Token = function (code, redirectUri) {
     logger.info(`json params : ${JSON.stringify(params)}`);
     logger.info(`endpoint : ${idam_api_url}/oauth2/token`);
 
-    const fetchOptions = utils.fetchOptions(params, 'POST', headers, PROXY);
+    // const fetchOptions = utils.fetchOptions(params, 'POST', headers, PROXY);
+
+    const fetch = require('node-fetch');
+    const HttpsProxyAgent = require('https-proxy-agent');
+    const fetchOptions = {
+        method: 'POST',
+        mode: 'cors',
+        redirect: 'follow',
+        follow: 10,
+        timeout: 10000,
+        body: params,
+        headers: new fetch.Headers(headers),
+        agent: PROXY ? new HttpsProxyAgent(PROXY) : null
+    };
+
     return utils.fetchJson(`${idam_api_url}/oauth2/token`, fetchOptions);
 };
 
