@@ -182,19 +182,18 @@ const getOauth2Token = function (code, redirectUri) {
     const idam_api_url = config.services.idam.apiUrl;
 
     const headers = {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': 'Basic ' + new Buffer(`${clientName}:${secret}`).toString('base64')
     };
 
-    const params = {
-        grant_type: 'authorization_code',
-        code: code,
-        redirect_uri: redirectUri
-    };
+    const params = new URLSearchParams();
+    params.append('grant_type', 'authorization_code');
+    params.append('code', code);
+    params.append('redirect_uri', redirectUri);
 
-    logger.info(headers);
-    logger.info(params);
-    logger.info(JSON.stringify(params));
+    logger.info(`params : ${params}`);
+    logger.info(`json params : ${JSON.stringify(params)}`);
+    logger.info(`endpoint : ${idam_api_url}/oauth2/token`);
 
     const fetchOptions = utils.fetchOptions(params, 'POST', headers, PROXY);
     return utils.fetchJson(`${idam_api_url}/oauth2/token`, fetchOptions);
