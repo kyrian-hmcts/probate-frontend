@@ -36,7 +36,7 @@ probate_frontend_port = "3101"
 
 probate_frontend_use_idam = "true"
 
-probate_frontend_use_redis = "false"
+probate_frontend_use_redis = "true"
 
 probate_business_service_url = "http://probate-business-service-sandbox-staging.service.core-compute-sandbox.internal/validate"
 
